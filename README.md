@@ -66,6 +66,17 @@ There is no build step because this is a standard-library Python application.
 
 The workflows use full commit-SHA-pinned actions. They do not write repository content, publish packages, deploy software, use secrets, or require server hosting.
 
+## Secure dependency maintenance
+
+`.github/dependabot.yml` asks GitHub's Dependabot service to check two dependency ecosystems every Monday:
+
+- `pip` checks the pinned Python quality tools in `requirements.tools.in` and `requirements.tools.txt`.
+- `github-actions` checks the action versions used in `.github/workflows/`.
+
+When an update exists, Dependabot opens a pull request instead of changing `main` directly. The existing **Repository Quality** workflow then tests that pull request. Review the version change, lock-file diff, CI result, and any release notes before merging. This project deliberately does not enable automatic merging: a passing automated check is evidence, not a substitute for human judgment.
+
+`.github/workflows/codeql.yml` provides separate security analysis for Python and GitHub Actions workflow configuration. It runs on pushes, pull requests, every Wednesday at 04:30 UTC, and manual dispatch. CodeQL uploads findings to GitHub's **Security** tab. Its only write permission is `security-events: write`, which is required to submit findings; it cannot write repository content, publish packages, or deploy software.
+
 ## Why this project is local-first
 
 CI quality gates are useful before any infrastructure exists. You can learn how a fresh GitHub runner validates a commit, how reports become artifacts, and how scheduled maintenance works without exposing an application or paying for a VPS.
