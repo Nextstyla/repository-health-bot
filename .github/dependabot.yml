@@ -6,8 +6,6 @@ updates:
       interval: weekly
       day: monday
     open-pull-requests-limit: 1
-    labels:
-      - dependencies
     commit-message:
       prefix: chore
       include: scope
@@ -22,9 +20,6 @@ updates:
       codeql-action:
         patterns:
           - "github/codeql-action/*"
-    labels:
-      - dependencies
-      - github-actions
     commit-message:
       prefix: chore
       include: scope
