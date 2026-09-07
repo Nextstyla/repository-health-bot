@@ -1,1 +1,17 @@
 workflow_mode: solo-git
+active_flow: secure_dependency_maintenance
+git:
+  branch: main
+  hash: 43523dd
+  working_tree: modified
+handoff:
+  last_step_completed: "Merged Dependabot PR #3, which updates CodeQL init and analyze together to v4.37.9."
+  open_decisions:
+    - "Verify the post-merge Repository Quality and CodeQL Security Analysis runs on main."
+    - "Review Dependabot PR #2 for the Ruff update after post-merge CI passes."
+    - "Resolve the uncommitted CRLF-only line-ending change in .github/workflows/codeql.yml before the next commit."
+  required_reading:
+    - "README.md"
+    - "CONVENTIONS.md"
+    - "specs/IMPACT_LATEST.md"
+  next_skill: "verify-work"
